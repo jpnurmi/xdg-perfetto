@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Perfetto
+Comment=System profiling, app tracing and trace analysis
+Icon=perfetto
+Exec=/usr/bin/perfetto %f
+Terminal=false
+MimeType=application/x-perfetto
