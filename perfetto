@@ -45,10 +45,6 @@ class HttpHandler(http.server.SimpleHTTPRequestHandler):
     self.send_error(404, "File not found")
 
 def open_trace_in_browser(path, origin):
-  if not path:
-    webbrowser.open_new_tab(origin)
-    return
-
   # We reuse the HTTP+RPC port because it's the only one allowed by the CSP.
   PORT = 9001
   path = os.path.abspath(path)
@@ -72,13 +68,17 @@ def main():
   parser.add_argument('--origin', default='https://ui.perfetto.dev', help=help)
 
   help = 'The trace file to open'
-  parser.add_argument('trace_file', nargs='?', help=help).completer = argcomplete.completers.FilesCompleter(['*.trace', '*.ftrace', '*.pftrace', '*.perfetto-trace'])
+  completer = argcomplete.completers.FilesCompleter(['*.trace', '*.ftrace', '*.pftrace', '*.perfetto-trace'])
+  parser.add_argument('trace_file', nargs='?', help=help).completer = completer
 
   argcomplete.autocomplete(parser)
 
   args = parser.parse_args()
 
-  open_trace_in_browser(args.trace_file, args.origin)
+  if args.trace_file:
+    open_trace_in_browser(args.trace_file, args.origin)
+  else:
+    webbrowser.open_new_tab(args.origin)
 
 if __name__ == '__main__':
   sys.exit(main())
