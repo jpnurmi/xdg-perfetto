@@ -6,6 +6,7 @@
     <glob-deleteall/>
     <glob pattern="*.trace"/>
     <glob pattern="*.ftrace"/>
+    <glob pattern="*.pftrace"/>
     <glob pattern="*.perfetto-trace"/>
   </mime-type>
 </mime-info>
