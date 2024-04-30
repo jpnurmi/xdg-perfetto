@@ -3,7 +3,7 @@ prefix=/usr
 install:
 	install -d $(prefix)/bin
 	install -t $(prefix)/bin -m 755 perfetto
-	desktop-file-install perfetto.desktop
+	desktop-file-install --rebuild-mime-info-cache perfetto.desktop
 	xdg-icon-resource install --size 256 --novendor perfetto.png
 	xdg-mime install --novendor application-x-perfetto.xml
 
